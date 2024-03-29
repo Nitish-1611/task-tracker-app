@@ -1,0 +1,92 @@
+.pending,.in-progress,.complete,.deploy,.defer {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.pending {
+  background: grey;
+  
+}
+
+.in-progress{
+  background: orange;
+  
+}
+
+.complete {
+  background: green;
+  
+}
+
+.deploy {
+  background: darkblue;
+}
+
+.defer {
+  background: darkgrey;
+  
+}
+
+.task-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 5px;
+  
+
+}
+
+.col-header {
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  color:aliceblue
+}
+
+.my-card {
+  margin: 12px;
+  background-color: rgb(252, 243, 243);
+}
+
+.filter {
+  margin: 25px;
+}
+
+.filter-input {
+  margin: 0 20px 6px 5px;
+  border-radius: 6px;
+  width: 170px;
+  padding: 5px;
+}
+
+#priority, #category {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border-radius: 6px;
+}
+
+.delete-task {
+  cursor: pointer;
+}
+
+/* .form-submit-div {
+  
+} */
+
+.form-submit-button {
+  width: 50%;
+  margin-left: 98px;
+}
+
+.edit-form {
+  display: grid;
+  margin: 10px;
+}
+
+.edit-form > select {
+  width: 120px;
+  margin: 8px
+}
+
+#category {
+  margin: 10px;
+}
+
