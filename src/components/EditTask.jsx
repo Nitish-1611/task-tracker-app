@@ -1,19 +1,27 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TaskList } from "../store/task-store";
 
 const EditTask = ({ task }) => {
-  const [changeCategory, setChangeCategory] = useState("");
-  const newSelectValue = useRef();
-  const { setCategoryValue, deleteTask } = useContext(TaskList);
-
-  const handleChange = (e) => {
-    setChangeCategory(e.target.value);
+  const { tasksList } = useContext(TaskList);
+  const statusValue = useRef();
+  const handleTaskUpdateButton = () => {
+    const statusValueElement = statusValue.current.value;
+    tasksList.forEach((item) => {
+      if (item.id === task.id) {
+        task.status = statusValueElement;
+        console.log(item.id, task.status, tasksList);
+      }
+    });
   };
 
-  const handleTaskSaveButton = () => {
-    setCategoryValue(changeCategory);
-   // deleteTask(task.title);
-  };
+  // const statusValueElement = statusValue.current.value;
+  //     newValue.status = statusValueElement;
+  //     console.log(newValue, "2nd");
+  //     task.status = newValue[0].status;
+
+  //   console.log(statusValueElement, task.id);
+  //   console.log(newValue[0].status, "newVal status");
+
   return (
     <>
       <div className="edit-form">
@@ -53,16 +61,15 @@ const EditTask = ({ task }) => {
             <option value="P3">P3</option>
           </select>
         </div>
-        <div className="category">
-          <label>Change Category: </label>
+        <div className="status">
+          <label>Change status: </label>
           <select
-            name="category"
-            id="category"
-            defaultValue={task.category}
-            onChange={handleChange}
-            ref={newSelectValue}
+            name="status"
+            id="status"
+            defaultValue={task.status}
+            ref={statusValue}
           >
-            <option disabled>{task.category}</option>
+            <option disabled>{task.status}</option>
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>
             <option value="Deployed">Deployed</option>
@@ -73,7 +80,7 @@ const EditTask = ({ task }) => {
           type="button"
           className="btn btn-primary"
           data-bs-dismiss="modal"
-          onClick={handleTaskSaveButton}
+          onClick={handleTaskUpdateButton}
         >
           Save Task
         </button>

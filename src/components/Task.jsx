@@ -4,7 +4,7 @@ import { useContext } from "react";
 import EditTask from "./EditTask";
 
 const Task = ({ task }) => {
-  const { deleteTask, setCategoryValue, categoryValue } = useContext(TaskList);
+  const { deleteTask, setStatusValue, statusValue } = useContext(TaskList);
 
   const handleTaskSaveButton = () => {};
   return (
@@ -21,7 +21,7 @@ const Task = ({ task }) => {
           <p className="card-text">{task.body}</p>
           <p>Assigned to: @{task.assignee}</p>
           <p>Priority: {task.priority}</p>
-          <p>Category: {task.category}</p>
+          <p>status: {task.status}</p>
 
           <a
             href="#"
@@ -54,7 +54,14 @@ const Task = ({ task }) => {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">{<EditTask task={task} />}</div>
+                <div className="modal-body">
+                  {
+                    <EditTask
+                      task={task}
+                      
+                    />
+                  }
+                </div>
                 <div className="modal-footer"></div>
               </div>
             </div>

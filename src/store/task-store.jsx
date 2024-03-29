@@ -2,10 +2,8 @@ import { createContext, useReducer, useState } from "react";
 
 export const TaskList = createContext({
   tasksList: [],
-  progressTask: [],
   addTask: () => {},
   deleteTask: () => {},
-  changeToProgress: () => {},
 });
 
 const taskListReducer = (currTaskList, action) => {
@@ -17,9 +15,6 @@ const taskListReducer = (currTaskList, action) => {
   } else if (action.type === "ADD_TASK") {
     newTaskList = [action.payload, ...currTaskList];
   }
-  else if (action.type === "CHANGE_TO_PROGRESS") {
-    
-  }
 
   return newTaskList;
 };
@@ -30,25 +25,13 @@ const TaskListProvider = ({ children }) => {
     DEFAULT_TASK_LIST
   );
 
-  const [categoryValue, setCategoryValue] = useState("");
+  const [statusValue, setStatusValue] = useState("");
 
   const addTask = (taskTitle, taskBody, assignee, priority) => {
     dispatchTaskList({
       type: "ADD_TASK",
       payload: {
         id: Date.now(),
-        title: taskTitle,
-        body: taskBody,
-        assignee: assignee,
-        priority: priority,
-      },
-    });
-  };
-
-  const changeToProgress = () => {
-    dispatchTaskList({
-      type: "CHANGE_TO_PROGRESS",
-      payload: {
         title: taskTitle,
         body: taskBody,
         assignee: assignee,
@@ -72,9 +55,8 @@ const TaskListProvider = ({ children }) => {
         tasksList,
         addTask,
         deleteTask,
-        categoryValue,
-        setCategoryValue,
-        changeToProgress,
+        statusValue,
+        setStatusValue,
       }}
     >
       {children}
@@ -89,7 +71,7 @@ const DEFAULT_TASK_LIST = [
     body: "Hi Everyone, Deploy this app.",
     assignee: "ABC",
     priority: "P1",
-    category: "Pending",
+    status: "Pending",
   },
   {
     id: 6,
@@ -97,7 +79,15 @@ const DEFAULT_TASK_LIST = [
     body: "Hi Everyone, Please test this app",
     assignee: "Xyz",
     priority: "P2",
-    category: "Pending",
+    status: "In Progress",
+  },
+  {
+    id: 7,
+    title: "Deployment",
+    body: "This is a deployment",
+    assignee: "PQR",
+    priority: "P3",
+    status: "Pending",
   },
 ];
 

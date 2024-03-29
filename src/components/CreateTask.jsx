@@ -7,8 +7,7 @@ const CreateTask = () => {
   const taskBodyElement = useRef();
   const assigneeElement = useRef();
   const priorityElement = useRef();
-  const categoryElement = useRef();
-
+  const statusElement = useRef();
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -16,16 +15,16 @@ const CreateTask = () => {
     const taskBody = taskBodyElement.current.value;
     const assignee = assigneeElement.current.value;
     const priority = priorityElement.current.value;
-    const category = categoryElement.current.value;
+    const status = statusElement.current.value;
 
-    addTask(taskTitle, taskBody, assignee, priority, category);
+    addTask(taskTitle, taskBody, assignee, priority, status);
 
     taskTitleElement.current.value = "";
     taskBodyElement.current.value = "";
     assigneeElement.current.value = "";
     priorityElement.current.value = "";
-    categoryElement.current.value = "";
-    console.log(taskTitle, taskBody, assignee, priority, category);
+    statusElement.current.value = "";
+    console.log(taskTitle, taskBody, assignee, priority, status);
   };
 
   return (
@@ -82,12 +81,12 @@ const CreateTask = () => {
           </select>
         </div>
         <div className="mb-3">
-          <label htmlFor="category" className="form-label">
-            Select Category
+          <label htmlFor="status" className="form-label">
+            Select status
           </label>
-          <select name="category" id="category" ref={categoryElement}>
+          <select name="status" id="status" ref={statusElement}>
             <option value="DEFAULT" disabled>
-              Category
+              status
             </option>
             <option value="Pending">Pending</option>
           </select>

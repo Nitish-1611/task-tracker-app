@@ -1,16 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Task from "./Task";
 import { TaskList } from "../store/task-store";
 
 const PendingTask = () => {
   const { tasksList } = useContext(TaskList);
-  //console.log(tasksList);
-
+  
   return (
     <>
-      {tasksList.map((item) => (
-        <Task key={item.title} task={item} />
-      ))}
+      {tasksList
+        .filter((item) => {
+          return item.status === "Pending";
+        })
+        .map((item) => (
+          <Task
+            key={item.id}
+            task={item}
+            
+          />
+        ))}
     </>
   );
 };

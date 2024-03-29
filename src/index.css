@@ -1,20 +1,21 @@
-.pending,.in-progress,.complete,.deploy,.defer {
+.pending,
+.in-progress,
+.complete,
+.deploy,
+.defer {
   border: 1px solid black;
   border-radius: 10px;
 }
 .pending {
   background: grey;
-  
 }
 
-.in-progress{
+.in-progress {
   background: orange;
-  
 }
 
 .complete {
   background: green;
-  
 }
 
 .deploy {
@@ -23,22 +24,19 @@
 
 .defer {
   background: darkgrey;
-  
 }
 
 .task-container {
   display: flex;
   justify-content: space-around;
   margin: 5px;
-  
-
 }
 
 .col-header {
   border: 1px solid black;
   border-radius: 10px;
   text-align: center;
-  color:aliceblue
+  color: aliceblue;
 }
 
 .my-card {
@@ -57,7 +55,8 @@
   padding: 5px;
 }
 
-#priority, #category {
+#priority,
+#status {
   margin-bottom: 10px;
   margin-left: 10px;
   border-radius: 6px;
@@ -83,10 +82,9 @@
 
 .edit-form > select {
   width: 120px;
-  margin: 8px
+  margin: 8px;
 }
 
-#category {
+#status {
   margin: 10px;
 }
-
