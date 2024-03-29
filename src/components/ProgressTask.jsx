@@ -4,7 +4,6 @@ import Task from "./Task";
 
 const ProgressTask = () => {
   const { tasksList } = useContext(TaskList);
-  // console.log(statusValue, "from progresstask");
 
   return (
     <>

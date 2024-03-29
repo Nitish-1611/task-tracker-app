@@ -2,16 +2,18 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { TaskList } from "../store/task-store";
 
 const EditTask = ({ task }) => {
-  const { tasksList } = useContext(TaskList);
+  const { tasksList,changeStatus } = useContext(TaskList);
   const statusValue = useRef();
   const handleTaskUpdateButton = () => {
-    const statusValueElement = statusValue.current.value;
-    tasksList.forEach((item) => {
-      if (item.id === task.id) {
-        task.status = statusValueElement;
-        console.log(item.id, task.status, tasksList);
-      }
-    });
+     const statusValueElement = statusValue.current.value;
+    // tasksList.forEach((item) => {
+    //   if (item.id === task.id) {
+    //     task.status = statusValueElement;
+    //     console.log(item.id, task.status, tasksList);
+    //   }
+    // });
+
+    changeStatus(statusValueElement, task.id)
   };
 
   // const statusValueElement = statusValue.current.value;

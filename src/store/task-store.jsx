@@ -4,6 +4,7 @@ export const TaskList = createContext({
   tasksList: [],
   addTask: () => {},
   deleteTask: () => {},
+  changeStatus: () => {},
 });
 
 const taskListReducer = (currTaskList, action) => {
@@ -14,6 +15,14 @@ const taskListReducer = (currTaskList, action) => {
     );
   } else if (action.type === "ADD_TASK") {
     newTaskList = [action.payload, ...currTaskList];
+    console.log("from addtask");
+  } else if (action.type === "CHANGE_STATUS") {
+    let filteredObj = currTaskList.find(
+      (item) => item.id === action.payload.taskId
+    );
+    filteredObj.status = action.payload.value;
+    console.log(filteredObj, "after update");
+    newTaskList = [filteredObj, ...currTaskList];
   }
 
   return newTaskList;
@@ -40,6 +49,16 @@ const TaskListProvider = ({ children }) => {
     });
   };
 
+  const changeStatus = (value, taskId) => {
+    dispatchTaskList({
+      type: "CHANGE_STATUS",
+      payload: {
+        value,
+        taskId,
+      },
+    });
+  };
+
   const deleteTask = (taskTitle) => {
     dispatchTaskList({
       type: "DELETE_TASK",
@@ -57,6 +76,7 @@ const TaskListProvider = ({ children }) => {
         deleteTask,
         statusValue,
         setStatusValue,
+        changeStatus,
       }}
     >
       {children}

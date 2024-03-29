@@ -4,7 +4,7 @@ import { useContext } from "react";
 import EditTask from "./EditTask";
 
 const Task = ({ task }) => {
-  const { deleteTask, setStatusValue, statusValue } = useContext(TaskList);
+  const { deleteTask } = useContext(TaskList);
 
   const handleTaskSaveButton = () => {};
   return (
@@ -54,14 +54,7 @@ const Task = ({ task }) => {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
-                  {
-                    <EditTask
-                      task={task}
-                      
-                    />
-                  }
-                </div>
+                <div className="modal-body">{<EditTask task={task} />}</div>
                 <div className="modal-footer"></div>
               </div>
             </div>
