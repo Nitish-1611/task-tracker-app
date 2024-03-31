@@ -4,13 +4,12 @@ import { TaskList } from "../store/task-store";
 
 const PendingTask = () => {
   const { tasksList } = useContext(TaskList);
-
   return (
     <>
       {tasksList
-        // .filter((item) => {
-        //   return item.status === "Pending";
-        // })
+        .filter((item) => {
+          return item.status === "Pending";
+        })
         .map((item) => (
           <Task key={item.id} task={item} />
         ))}

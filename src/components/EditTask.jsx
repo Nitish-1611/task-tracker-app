@@ -1,28 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { TaskList } from "../store/task-store";
 
 const EditTask = ({ task }) => {
-  const { tasksList,changeStatus } = useContext(TaskList);
+  const { changeStatus } = useContext(TaskList);
   const statusValue = useRef();
+  const priorityValue = useRef();
+
   const handleTaskUpdateButton = () => {
-     const statusValueElement = statusValue.current.value;
-    // tasksList.forEach((item) => {
-    //   if (item.id === task.id) {
-    //     task.status = statusValueElement;
-    //     console.log(item.id, task.status, tasksList);
-    //   }
-    // });
-
-    changeStatus(statusValueElement, task.id)
+    const statusValueElement = statusValue.current.value;
+    const priorityValueElement = priorityValue.current.value;
+    changeStatus(statusValueElement, task.id, priorityValueElement);
   };
-
-  // const statusValueElement = statusValue.current.value;
-  //     newValue.status = statusValueElement;
-  //     console.log(newValue, "2nd");
-  //     task.status = newValue[0].status;
-
-  //   console.log(statusValueElement, task.id);
-  //   console.log(newValue[0].status, "newVal status");
 
   return (
     <>
@@ -54,8 +42,8 @@ const EditTask = ({ task }) => {
         <br />
         <div>
           <label>Change Priority: </label>
-          <select name="priority" id="priority">
-            <option value="DEFAULT" disabled>
+          <select name="priority" id="priority" ref={priorityValue}>
+            <option value={task.priority} disabled selected>
               {task.priority}
             </option>
             <option value="P1">P1</option>

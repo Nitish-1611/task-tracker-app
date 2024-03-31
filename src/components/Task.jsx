@@ -3,38 +3,59 @@ import { TaskList } from "../store/task-store";
 import { useContext } from "react";
 import EditTask from "./EditTask";
 
+// destructuring task object via props
 const Task = ({ task }) => {
-  const { deleteTask } = useContext(TaskList);
 
-  const handleTaskSaveButton = () => {};
+  const { deleteTask } = useContext(TaskList);
+ 
+// delete task logic
+  const handleDelete = () => {
+    const shouldDelete = window.confirm("Are you sure you want to delete?");
+    if (shouldDelete) {
+      // Perform delete operation
+      deleteTask(task.id);
+      console.log("Item deleted!");
+    } else {
+      // User canceled delete operation
+      console.log("Delete operation canceled.");
+    }
+  };
   return (
     <>
       <div className="card my-card">
         <span
           className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger delete-task"
-          onClick={() => deleteTask(task.title)}
+          onClick={handleDelete}
         >
-          <MdDelete />
+          {/* React Delete icon from react icon library */}
+          <MdDelete /> 
         </span>
         <div className="card-body">
+          {/* Passing values coming from props */}
           <h5 className="card-title">{task.title}</h5>
           <p className="card-text">{task.body}</p>
-          <p>Assigned to: @{task.assignee}</p>
-          <p>Priority: {task.priority}</p>
-          <p>status: {task.status}</p>
+          <p>
+            <b>Assigned to:</b> @{task.assignee}
+          </p>
+          <p>
+            <b>Priority:</b> {task.priority}
+          </p>
+          <p>
+            <b>Status:</b> {task.status}
+          </p>
 
-          <a
+          <button
             href="#"
             className="btn btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+            data-bs-target={`#staticBackdrop${task.id}`}
           >
             Edit Task
-          </a>
-
+          </button>
+        {/* Edit task Modal */}
           <div
             className="modal fade"
-            id="staticBackdrop"
+            id={`staticBackdrop${task.id}`}
             data-bs-backdrop="static"
             data-bs-keyboard="false"
             tabIndex="-1"

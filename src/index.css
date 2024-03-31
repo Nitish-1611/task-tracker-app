@@ -1,3 +1,9 @@
+body {
+  background-image: url('/background.jpg');
+  background-size: cover; 
+}
+
+
 .pending,
 .in-progress,
 .complete,
@@ -5,6 +11,7 @@
 .defer {
   border: 1px solid black;
   border-radius: 10px;
+  margin: 25px;
 }
 .pending {
   background: grey;
@@ -29,27 +36,40 @@
 .task-container {
   display: flex;
   justify-content: space-around;
-  margin: 5px;
+  margin: 10px;
+  border: 5px solid white;
+  border-radius: 10px;
 }
 
 .col-header {
   border: 1px solid black;
   border-radius: 10px;
   text-align: center;
-  color: aliceblue;
+  color: white;
 }
 
 .my-card {
   margin: 12px;
-  background-color: rgb(252, 243, 243);
 }
 
+.card-text {
+  resize: none; /* Disable textarea resizing */
+  max-height: 100px; /* Set max-height for the textarea */
+  overflow-y: auto;}
+
 .filter {
+  display: flex;
   margin: 25px;
 }
 
+@media screen and (max-width: 480px) {
+  .filter {
+    display: grid;
+  }
+}
+
 .filter-input {
-  margin: 0 20px 6px 5px;
+  margin: 0 20px 10px 5px;
   border-radius: 6px;
   width: 170px;
   padding: 5px;
@@ -60,15 +80,12 @@
   margin-bottom: 10px;
   margin-left: 10px;
   border-radius: 6px;
+
 }
 
 .delete-task {
   cursor: pointer;
 }
-
-/* .form-submit-div {
-  
-} */
 
 .form-submit-button {
   width: 50%;
@@ -88,3 +105,4 @@
 #status {
   margin: 10px;
 }
+

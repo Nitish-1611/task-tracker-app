@@ -1,28 +1,46 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const TaskList = createContext({
   tasksList: [],
   addTask: () => {},
   deleteTask: () => {},
   changeStatus: () => {},
+  filterByAssignee: () => {},
+  filterByPriority: () => {},
 });
 
 const taskListReducer = (currTaskList, action) => {
   let newTaskList = currTaskList;
+
   if (action.type === "DELETE_TASK") {
     newTaskList = currTaskList.filter(
-      (task) => task.title !== action.payload.taskTitle
+      (task) => task.id !== action.payload.taskId
     );
   } else if (action.type === "ADD_TASK") {
     newTaskList = [action.payload, ...currTaskList];
-    console.log("from addtask");
   } else if (action.type === "CHANGE_STATUS") {
     let filteredObj = currTaskList.find(
       (item) => item.id === action.payload.taskId
     );
     filteredObj.status = action.payload.value;
+    filteredObj.priority = action.payload.taskPriority;
     console.log(filteredObj, "after update");
-    newTaskList = [filteredObj, ...currTaskList];
+    newTaskList = currTaskList.map((item) =>
+      item.id === filteredObj ? filteredObj : item
+    );
+  } else if (action.type === "FILTER_ASSIGNEE") {
+    console.log(currTaskList, "current");
+
+    newTaskList = currTaskList.filter(
+      (item) => item.assignee === action.payload.assigneeValue
+    );
+
+    console.log(newTaskList, "new");
+    console.log(currTaskList, "currentasklist");
+  } else if (action.type === "FILTER_PRIORITY") {
+    newTaskList = currTaskList.filter(
+      (item) => item.priority === action.payload.priorityValue
+    );
   }
 
   return newTaskList;
@@ -34,9 +52,7 @@ const TaskListProvider = ({ children }) => {
     DEFAULT_TASK_LIST
   );
 
-  const [statusValue, setStatusValue] = useState("");
-
-  const addTask = (taskTitle, taskBody, assignee, priority) => {
+  const addTask = (taskTitle, taskBody, assignee, priority, status) => {
     dispatchTaskList({
       type: "ADD_TASK",
       payload: {
@@ -45,25 +61,47 @@ const TaskListProvider = ({ children }) => {
         body: taskBody,
         assignee: assignee,
         priority: priority,
+        status: status,
       },
     });
   };
 
-  const changeStatus = (value, taskId) => {
+  const changeStatus = (value, taskId, taskPriority) => {
     dispatchTaskList({
       type: "CHANGE_STATUS",
       payload: {
         value,
         taskId,
+        taskPriority,
       },
     });
   };
 
-  const deleteTask = (taskTitle) => {
+  const deleteTask = (taskId) => {
     dispatchTaskList({
       type: "DELETE_TASK",
       payload: {
-        taskTitle,
+        taskId,
+      },
+    });
+  };
+
+  const filterByAssignee = (assigneeValue, priorityValue) => {
+    console.log(typeof assigneeValue, "from store");
+    dispatchTaskList({
+      type: "FILTER_ASSIGNEE",
+      payload: {
+        assigneeValue,
+        priorityValue,
+      },
+    });
+  };
+
+  const filterByPriority = (priorityValue) => {
+    dispatchTaskList({
+      type: "FILTER_PRIORITY",
+      payload: {
+        priorityValue,
       },
     });
   };
@@ -74,9 +112,9 @@ const TaskListProvider = ({ children }) => {
         tasksList,
         addTask,
         deleteTask,
-        statusValue,
-        setStatusValue,
         changeStatus,
+        filterByAssignee,
+        filterByPriority,
       }}
     >
       {children}
@@ -104,10 +142,26 @@ const DEFAULT_TASK_LIST = [
   {
     id: 7,
     title: "Deployment",
-    body: "This is a deployment",
+    body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit facere facilis vitae, optio ipsum tempore mollitia ad eos obcaecati, fuga architecto quam dolor ea nisi similique corrupti, cupiditate eius perferendis!",
     assignee: "PQR",
     priority: "P3",
     status: "Pending",
+  },
+  {
+    id: 8,
+    title: "Feature X",
+    body: "Implement the feature in main branch",
+    assignee: "MAN",
+    priority: "P2",
+    status: "Deployed",
+  },
+  {
+    id: 9,
+    title: "Add Payment Button",
+    body: "Add a button which redirects to Payment Gateway",
+    assignee: "ABC",
+    priority: "P3",
+    status: "Completed",
   },
 ];
 

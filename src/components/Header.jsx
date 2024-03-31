@@ -1,14 +1,7 @@
-import { useState } from "react";
 import CreateTask from "./CreateTask";
 import { Modal } from "bootstrap";
 
 const Header = () => {
-  // const [modalOpen, setModalOpen] = useState(false);
-
-  // const handleCreateTask = () => {
-  //   setModalOpen(true);
-  // };
-
   return (
     <header className="p-3 text-bg-dark">
       <div className="container">
@@ -17,11 +10,11 @@ const Header = () => {
 
           <button
             type="button"
-            className="btn btn-warning"
+            className="btn btn-success"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Create New Task
+            Add New Task
           </button>
 
           <div
@@ -34,7 +27,10 @@ const Header = () => {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h1 className="modal-title fs-5 text-dark" id="exampleModalLabel">
+                  <h1
+                    className="modal-title fs-5 text-dark"
+                    id="exampleModalLabel"
+                  >
                     Create New Task
                   </h1>
                   <button
@@ -47,7 +43,6 @@ const Header = () => {
                 <div className="modal-body text-dark">
                   <CreateTask />
                 </div>
-                
               </div>
             </div>
           </div>
