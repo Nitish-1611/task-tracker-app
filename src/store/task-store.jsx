@@ -24,19 +24,15 @@ const taskListReducer = (currTaskList, action) => {
     );
     filteredObj.status = action.payload.value;
     filteredObj.priority = action.payload.taskPriority;
-    console.log(filteredObj, "after update");
     newTaskList = currTaskList.map((item) =>
       item.id === filteredObj ? filteredObj : item
     );
   } else if (action.type === "FILTER_ASSIGNEE") {
-    console.log(currTaskList, "current");
 
     newTaskList = currTaskList.filter(
       (item) => item.assignee === action.payload.assigneeValue
     );
 
-    console.log(newTaskList, "new");
-    console.log(currTaskList, "currentasklist");
   } else if (action.type === "FILTER_PRIORITY") {
     newTaskList = currTaskList.filter(
       (item) => item.priority === action.payload.priorityValue
@@ -87,7 +83,6 @@ const TaskListProvider = ({ children }) => {
   };
 
   const filterByAssignee = (assigneeValue, priorityValue) => {
-    console.log(typeof assigneeValue, "from store");
     dispatchTaskList({
       type: "FILTER_ASSIGNEE",
       payload: {

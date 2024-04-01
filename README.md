@@ -30,7 +30,8 @@ The Task Tracker App is designed to help team to manage their tasks efficiently 
 
 4. **Search Functionality**:
    - Enter the assignee name or priority level you want to find in the search bar.
-   - The app will display tasks containing those assignee in their names or descriptions.
+   - Press "Enter" after entering name of assignee in the filter assignee input box.
+   - The app will display tasks containing those assignee and priority.
 
 
 # Note:

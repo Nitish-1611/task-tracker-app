@@ -16,7 +16,6 @@ const Filter = () => {
   const handleFilterAssignee = (e) => {
     const assigneeValue = filterAssignee.current.value;
     if (e.key === "Enter") {
-      console.log(assigneeValue);
       filterByAssignee(assigneeValue);
     }
   };

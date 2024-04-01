@@ -14,11 +14,7 @@ const Task = ({ task }) => {
     if (shouldDelete) {
       // Perform delete operation
       deleteTask(task.id);
-      console.log("Item deleted!");
-    } else {
-      // User canceled delete operation
-      console.log("Delete operation canceled.");
-    }
+    } 
   };
   return (
     <>

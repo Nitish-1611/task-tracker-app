@@ -24,7 +24,6 @@ const CreateTask = () => {
     assigneeElement.current.value = "";
     priorityElement.current.value = "";
     statusElement.current.value = "";
-    console.log(taskTitle, taskBody, assignee, priority, status);
   };
 
   return (
